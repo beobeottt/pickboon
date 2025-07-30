@@ -1,4 +1,3 @@
-
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
@@ -12,9 +11,6 @@ export class Club extends Document {
 
   @Prop({required: true, min: 0})
   members: number;
-
-  @Prop({required: true})
-  date: Date;
 
   @Prop({required: true})
   logo: string;
