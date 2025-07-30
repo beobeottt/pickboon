@@ -1,34 +1,34 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
-import ClubCard from '/Users/phamlong/Desktop/pit/pick/src/ClubCard';
-import Navbar from './NavBar';
+import { SocialCard } from "../components/SocialCard";
+import Navbar from "./NavBar";
 import Footer from "./footer";
 
-const ClubListPage: React.FC = () => {
+const SocialListPage: React.FC = () =>
+{
     const [search, setSearch] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
-    const [clubs, setClubs] = useState<any[]>([]);
+    const [socials, setSocials] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-
+    // get inf from database
     useEffect(() => {
-        axiosInstance.get("/clubs")
-            .then(res => {
-                setClubs(res.data);
-                setLoading(false);
-            })
-            .catch(() => setLoading(false));
+        axiosInstance.get("/social")
+        .then(res => {
+            setSocials(res.data);
+            setLoading(false);
+        })
+        .catch(() => setLoading(false));
     }, []);
 
-    if (loading) return <div className="text-white">Đang tải dữ liệu...</div>;
+    if(loading) return <div className="text-white">Đang tải dữ liệu.....</div>;
 
-    const filteredClubs = clubs.filter((club) => {
-        return (
-            club.name.toLowerCase().includes(search.toLowerCase()) &&
-            (selectedCity === '' || club.location.includes(selectedCity))
+    const filteredSocials = socials.filter((social) => {
+        return(
+            social.name.toLowerCase().includes(search.toLowerCase()) && (selectedCity === '' || social.location.includes(selectedCity))
         );
     });
-
-    return (
+    return(
         <div className="bg-[#1e1f29] text-white min-h-screen font-sans">
             <Navbar />
             <h1 className="text-2xl font-bold mb-6">Danh sách Clubs</h1>
@@ -86,13 +86,13 @@ const ClubListPage: React.FC = () => {
             </div>
 
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {filteredClubs.map((club, index) => (
-                    <ClubCard logo={''} key={index} {...club} />
+                {filteredSocials.map((social, index) => (
+                    <SocialCard logo={''} key={index} {...social} />
                 ))}
             </div>
             <Footer/>
         </div>
-    );
-};
+    )
+}
 
-export default ClubListPage;
+export default SocialListPage;

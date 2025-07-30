@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./NavBar";
 import axiosInstance from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "./footer";
 
 const HomePage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -57,18 +58,18 @@ const HomePage = () => {
       <Navbar/>
 
       {/* ✅ Carousel */}
-      <div className="flex justify-center items-center py-10">
-        <div className="relative max-w-xl w-full flex justify-center items-center">
+      <div className="flex justify-center items-center py-16">
+        <div className="relative max-w-4xl w-full flex justify-center items-center">
           <img
             src={images[currentImageIndex]}
             alt={`Slide ${currentImageIndex + 1}`}
-            className="w-[300px] h-auto object-contain transition-opacity duration-500"
+            className="w-[600px] h-auto object-contain transition-opacity duration-500"
           />
 
           {/* Nút điều hướng trái */}
           <button
             onClick={prevImage}
-            className="absolute left-0 md:left-[-40px] top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 transition"
+            className="absolute left-4 md:left-[-60px] top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-4 rounded-full hover:bg-opacity-75 transition text-2xl"
           >
             ‹
           </button>
@@ -76,18 +77,18 @@ const HomePage = () => {
           {/* Nút điều hướng phải */}
           <button
             onClick={nextImage}
-            className="absolute right-0 md:right-[-40px] top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 transition"
+            className="absolute right-4 md:right-[-60px] top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-4 rounded-full hover:bg-opacity-75 transition text-2xl"
           >
             ›
           </button>
 
           {/* Dot indicators */}
-          <div className="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 flex gap-3">
             {images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
                   index === currentImageIndex ? "bg-white" : "bg-white/50 hover:bg-white/80"
                 }`}
               />
@@ -98,68 +99,24 @@ const HomePage = () => {
 
       {/* Giới thiệu */}
       <div className="max-w-5xl mx-auto text-center px-4">
-        <h2 className="text-3xl font-bold mb-4">PVNA Tour 2025</h2>
-        <p className="text-gray-300 mb-6">
+        <h2 className="text-3xl font-bold mb-4 text-white">PVNA Tour 2025</h2>
+        <p className="text-white mb-6">
           VieSport TOUR 2025 – Giải đấu Pickleball đẳng cấp toàn quốc! Giải đấu hứa hẹn mang đến những trận đấu đỉnh cao, tinh thần thể thao sôi động và cơ hội kết nối cộng đồng Pickleball Việt Nam.
         </p>
         {/* Tabs */}
         
 
-        {/* Danh sách vận động viên */}
-        <div className="bg-[#23243a] rounded-lg p-6 mt-8 shadow-lg">
-          <h3 className="text-xl font-bold mb-4">Danh sách vận động viên</h3>
-          {loading ? (
-            <div>Đang tải dữ liệu...</div>
-          ) : athletes.length === 0 ? (
-            <div>Chưa có vận động viên nào.</div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full text-left border-separate border-spacing-y-2">
-                <thead>
-                  <tr className="bg-[#282a36]">
-                    <th className="px-4 py-2">Athlete</th>
-                    <th className="px-4 py-2">Team</th>
-                    <th className="px-4 py-2">Point</th>
-                    <th className="px-4 py-2">Gender</th>
-                    <th className="px-4 py-2">Location</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {athletes.map((athlete, idx) => (
-                    <tr
-                      key={athlete._id || idx}
-                      className="bg-[#23243a] hover:bg-[#282a36] rounded cursor-pointer"
-                      onClick={() => navigate(`/athlete/${athlete._id}`)}
-                    >
-                      <td className="px-4 py-2 font-semibold flex items-center gap-2">
-                        {athlete.image && !imageErrors[athlete._id] ? (
-                          <img
-                            src={`http://localhost:3000/athlete/uploads/${athlete.image}`}
-                            alt={athlete.name}
-                            className="w-8 h-8 rounded-full object-cover border border-gray-400"
-                            onError={() => {
-                              setImageErrors(prev => ({...prev, [athlete._id]: true}));
-                            }}
-                          />
-                        ) : (
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-red-600 text-white font-bold text-lg border border-gray-400">
-                            {athlete.name ? athlete.name.charAt(0).toUpperCase() : '?'}
-                          </div>
-                        )}
-                        {athlete.name || ""}
-                      </td>
-                      <td className="px-4 py-2">{athlete.team || ""}</td>
-                      <td className="px-4 py-2">{athlete.point || ""}</td>
-                      <td className="px-4 py-2">{athlete.gender || ""}</td>
-                      <td className="px-4 py-2">{athlete.location || ""}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+        {/* Button chuyển sang trang Pickleball */}
+        <div className="text-center mt-8">
+          <button
+            onClick={() => navigate('/clubs')}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-xl transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Xem Danh Sách Pickleball
+          </button>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

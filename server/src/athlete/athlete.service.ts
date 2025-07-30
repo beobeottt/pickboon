@@ -1,45 +1,44 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Athlete } from './schemas/athlete.schema';
-import { CreateAthleteDto } from './dto/athlete.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Athlete } from './entity/athlete.entity';
+import { Repository } from 'typeorm';
+import { CreateAthleteDto } from './dto/create-athlete.dto';
+import { UpdateAthleteDto } from './dto/update-athlete.dto';
+
 
 @Injectable()
 export class AthleteService {
   constructor(
-    @InjectModel(Athlete.name) private athleteModel: Model<Athlete>,
+    @InjectRepository(Athlete)
+    private athleteRepository: Repository<Athlete>,
   ) {}
 
-  async create(createAthleteDto: CreateAthleteDto): Promise<Athlete> {
-    const createdAthlete = new this.athleteModel(createAthleteDto);
-    return createdAthlete.save();
+  async create(dto: CreateAthleteDto): Promise<Athlete> {
+    const athlete = this.athleteRepository.create(dto);
+    return this.athleteRepository.save(athlete);
   }
 
   async findAll(): Promise<Athlete[]> {
-    return this.athleteModel.find().exec();
+    return this.athleteRepository.find();
   }
 
   async findOne(id: string): Promise<Athlete> {
-    const athlete = await this.athleteModel.findById(id).exec();
+    const athlete = await this.athleteRepository.findOneBy({ id });
     if (!athlete) {
       throw new NotFoundException(`Athlete with ID ${id} not found`);
     }
     return athlete;
   }
 
-  async update(id: string, updateAthleteDto: CreateAthleteDto): Promise<Athlete> {
-    const updatedAthlete = await this.athleteModel
-      .findByIdAndUpdate(id, updateAthleteDto, { new: true })
-      .exec();
-    if (!updatedAthlete) {
-      throw new NotFoundException(`Athlete with ID ${id} not found`);
-    }
-    return updatedAthlete;
+  async update(id: string, dto: UpdateAthleteDto): Promise<Athlete> {
+    const athlete = await this.findOne(id);
+    const updated = Object.assign(athlete, dto);
+    return this.athleteRepository.save(updated);
   }
 
   async remove(id: string): Promise<void> {
-    const result = await this.athleteModel.findByIdAndDelete(id).exec();
-    if (!result) {
+    const result = await this.athleteRepository.delete(id);
+    if (result.affected === 0) {
       throw new NotFoundException(`Athlete with ID ${id} not found`);
     }
   }
