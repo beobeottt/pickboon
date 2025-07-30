@@ -8,6 +8,7 @@ import FormRegisterAthlete from "./pages/FormRegisterAthlete";
 import Navbar from "./pages/NavBar";
 import AthleteProfile from "./pages/AthleteProfile";
 import OfficialTournament from "./pages/AmateurTournament";
+import AthleteListPage from "./pages/AthleteListPage";
 
 function App(){
   return (
@@ -21,6 +22,7 @@ function App(){
         <Route path = "/NavBar" element={<Navbar/>}/>
         <Route path = "/athlete/:id" element={<AthleteProfile/>}/>
         <Route path = "/amateur-tournament" element={<OfficialTournament/>}/>
+        <Route path = "/athlete-list" element={<AthleteListPage/>}/>
       </Routes>
     </Router>
   )
