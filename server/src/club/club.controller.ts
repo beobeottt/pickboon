@@ -7,13 +7,15 @@ import {
     Put,
     Delete,
     NotFoundException,
+    HttpException,
+    HttpStatus,
   } from '@nestjs/common';
-  import { ClubService } from './club.service';
-  import { Club } from './Schemas/club.schema';
+import { ClubService } from './club.service';
 import { CreateClubDto, UpdateClubDto } from './dto/club.dto';
+import { Club } from './entity/club.entity';
 
   
-  @Controller('clubs')
+  @Controller('club')
   export class ClubController {
     constructor(private readonly clubService: ClubService) {}
   
@@ -43,7 +45,15 @@ import { CreateClubDto, UpdateClubDto } from './dto/club.dto';
   
     @Delete(':id')
     async remove(@Param('id') id: string) {
-      return this.clubService.remove(id);
+      try{
+        await this.clubService.remove(id);
+        return {message: 'club đã được xoá thành công'};
+      }
+      catch(error){
+        console.log('lỗi khi xoá club', error.message, error.stack);
+        throw new HttpException(`Lỗi khi xóa club: ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+      
     }
   }
   

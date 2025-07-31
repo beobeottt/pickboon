@@ -31,7 +31,7 @@ const SocialListPage: React.FC = () =>
     return(
         <div className="bg-[#1e1f29] text-white min-h-screen font-sans">
             <Navbar />
-            <h1 className="text-2xl font-bold mb-6">Danh sách Clubs</h1>
+            <h1 className="text-2xl font-bold mb-6">Danh sách Social</h1>
 
             <div className="flex flex-wrap gap-4 mb-6">
                 <input
