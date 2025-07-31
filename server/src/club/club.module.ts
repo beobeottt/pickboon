@@ -4,9 +4,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ClubService } from './club.service';
 import { ClubController } from './club.controller';
 import { Club, ClubSchema } from './Schemas/club.schema';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Club.name, schema: ClubSchema }])],
+  imports: [TypeOrmModule.forFeature([Club])],
   controllers: [ClubController],
   providers: [ClubService],
 })

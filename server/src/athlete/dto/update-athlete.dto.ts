@@ -1,4 +1,4 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, Max, Min } from 'class-validator';
+import { IsDecimal, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, Max, Min } from 'class-validator';
 import { Gender } from '../../common/enums/gender.enum';
 
 export class UpdateAthleteDto {
@@ -22,6 +22,7 @@ export class UpdateAthleteDto {
   gender?: Gender;
 
   @IsOptional()
+  @IsDecimal()
   @Min(1)
   @Max(10)
   point?: number;

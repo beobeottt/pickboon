@@ -31,19 +31,19 @@ import { CreateClubDto, UpdateClubDto } from './dto/club.dto';
       return club;
     }
   
-    // @Post()
-    // async create(@Body() createClubDto: CreateClubDto): Promise<Club> {
-    //   return this.clubService.create(createClubDto);
-    // }
+    @Post()
+    async create(@Body() createClubDto: CreateClubDto): Promise<Club> {
+      return this.clubService.create(createClubDto);
+    }
   
     @Put(':id')
     async update(@Param('id') id: string, @Body() updateClubDto: UpdateClubDto): Promise<Club> {
       return this.clubService.update(id, updateClubDto);
     }
   
-    // @Delete(':id')
-    // async remove(@Param('id') id: string): Promise<{ deleted: boolean }> {
-    //   return this.clubService.remove(id);
-    // }
+    @Delete(':id')
+    async remove(@Param('id') id: string) {
+      return this.clubService.remove(id);
+    }
   }
   
