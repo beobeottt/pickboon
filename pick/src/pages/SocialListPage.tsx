@@ -25,7 +25,8 @@ const SocialListPage: React.FC = () =>
 
     const filteredSocials = socials.filter((social) => {
         return(
-            social.name.toLowerCase().includes(search.toLowerCase()) && (selectedCity === '' || social.location.includes(selectedCity))
+            social.name.toLowerCase().includes(search.toLowerCase()) && 
+            (selectedCity === '' || social.location.includes(selectedCity))
         );
     });
     return(
@@ -92,7 +93,7 @@ const SocialListPage: React.FC = () =>
             </div>
             <Footer/>
         </div>
-    )
-}
+    );
+};
 
 export default SocialListPage;

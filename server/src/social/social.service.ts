@@ -20,27 +20,27 @@ export class SocialService {
         return this.socialRepository.find()
     }
 
-    async findOne(id: string): Promise<Social>{
-        const social = await this.socialRepository.findOneBy({id});
+    async findOne(uuid: string): Promise<Social>{
+        const social = await this.socialRepository.findOneBy({uuid});
         if(!social){
-            throw new NotFoundException(`Social with ID ${id} not found`);
+            throw new NotFoundException(`Social with ID ${uuid} not found`);
         }
         return social
     }
 
-    async update(id: string, dto: UpdateSocialDto): Promise<Social>
+    async update(uuid: string, dto: UpdateSocialDto): Promise<Social>
     {
-        const social = await this.findOne(id);
+        const social = await this.findOne(uuid);
         const updated = Object.assign(social, dto);
         return this.socialRepository.save(updated);
     }
 
-    async remove(id: string): Promise<void>
+    async remove(uuid: string): Promise<void>
     {
-        const result = await this.socialRepository.delete(id);
+        const result = await this.socialRepository.delete(uuid);
         if(result.affected === 0)
         {
-            throw new NotFoundException(`Social with ID ${id} not found`)
+            throw new NotFoundException(`Social with ID ${uuid} not found`)
         }
     }
 }

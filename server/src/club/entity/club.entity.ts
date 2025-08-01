@@ -16,4 +16,13 @@ export class Club{
 
     @Column({nullable: true})
     logo: string;
+
+    @Column()
+    date: Date;
+
+    @Column({type: 'float', nullable: true})
+    point: number;
+
+    @Column({type: 'float', nullable: true})
+    price: number;
 }

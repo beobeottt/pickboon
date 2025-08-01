@@ -1,13 +1,5 @@
 import { Gender, Authenticate, Categories } from "./common";
 
-export interface Club {
-    name: string;
-    location: string;
-    members: number;
-    date: Date;
-    logo: string;
-}
-
 export interface Athlete {
     name: string;
     location: string;

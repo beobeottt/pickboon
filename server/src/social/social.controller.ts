@@ -20,13 +20,13 @@ export class SocialController {
         return this.clubService.findAll();
     }
 
-    @Get(':id')
-    async findOne(@Param('id') id: string): Promise<Social> {
-        const club = await this.clubService.findOne(id);
-        if (!club) {
-            throw new NotFoundException(`Club with ID ${id} not found`);
+    @Get(':uuid')
+    async findOne(@Param('uuid') uuid: string): Promise<Social> {
+        const social = await this.clubService.findOne(uuid);
+        if (!social) {
+            throw new NotFoundException(`Club with ID ${uuid} not found`);
         }
-        return club;
+        return social;
     }
 
     @Post()
@@ -34,13 +34,13 @@ export class SocialController {
         return this.clubService.create(createClubDto);
     }
 
-    @Put(':id')
-    async update(@Param('id') id: string, @Body() updateClubDto: UpdateSocialDto): Promise<Social> {
-        return this.clubService.update(id, updateClubDto);
+    @Put(':uuid')
+    async update(@Param('uuid') uuid: string, @Body() updateClubDto: UpdateSocialDto): Promise<Social> {
+        return this.clubService.update(uuid, updateClubDto);
     }
 
-    @Delete(':id')
-    async remove(@Param('id') id: string) {
-        return this.clubService.remove(id);
+    @Delete(':uuid')
+    async remove(@Param('uuid') uuid: string) {
+        return this.clubService.remove(uuid);
     }
 }

@@ -2,6 +2,7 @@
   "name": "pick",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://viesports.org",
   "dependencies": {
     "@radix-ui/react-select": "^2.2.5",
     "@testing-library/dom": "^10.4.0",
