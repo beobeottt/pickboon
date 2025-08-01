@@ -1,8 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
-import ClubCard from '/Users/phamlong/Desktop/pit/pick/src/ClubCard';
+import { Club } from "../types/Club";
 import Navbar from './NavBar';
 import Footer from "./footer";
+import { ClubCard } from "../components/ClubCard";
 
 const ClubListPage: React.FC = () => {
     const [search, setSearch] = useState('');
@@ -11,7 +13,7 @@ const ClubListPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axiosInstance.get("/clubs")
+        axiosInstance.get("/club")
             .then(res => {
                 setClubs(res.data);
                 setLoading(false);
@@ -31,6 +33,7 @@ const ClubListPage: React.FC = () => {
     return (
         <div className="bg-[#1e1f29] text-white min-h-screen font-sans">
             <Navbar />
+
             <h1 className="text-2xl font-bold mb-6">Danh sách Clubs</h1>
 
             <div className="flex flex-wrap gap-4 mb-6">
@@ -62,7 +65,7 @@ const ClubListPage: React.FC = () => {
                     <option value="Gia Lai">Gia Lai</option>
                     <option value="Khánh Hoà">Khánh Hoà</option>
                     <option value="Lâm Đồng">Lâm Đồng</option>
-                    <option value="1Đắk Lắk">Đắk Lắk</option>
+                    <option value="Đắk Lắk">Đắk Lắk</option>
                     <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                     <option value="Đồng Nai">Đồng Nai</option>
                     <option value="Tây Ninh">Tây Ninh</option>
@@ -86,11 +89,11 @@ const ClubListPage: React.FC = () => {
             </div>
 
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {filteredClubs.map((club, index) => (
-                    <ClubCard logo={''} key={index} {...club} />
+                {filteredClubs.map((club) => (
+                    <ClubCard key={club.uuid} {...club} />
                 ))}
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 };
