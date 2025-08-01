@@ -32,7 +32,7 @@ const SocialListPage: React.FC = () =>
     return(
         <div className="bg-[#1e1f29] text-white min-h-screen font-sans">
             <Navbar />
-            <h1 className="text-2xl font-bold mb-6">Danh sách Social</h1>
+            <h1 className="text-2xl font-bold mb-6 text-center">Danh sách Social</h1>
 
             <div className="flex flex-wrap gap-4 mb-6">
                 <input
@@ -42,7 +42,7 @@ const SocialListPage: React.FC = () =>
                     onChange={(e) => setSearch(e.target.value)}
                     className="p-2 rounded text-black"
                 />
-
+                <button onClick={() => setSearch(search)} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-8 rounded-lg text-xl transition-colors duration-300 shadow-lg hover:shadow-xl">Search</button>
                 <select
                     value={selectedCity}
                     onChange={(e) => setSelectedCity(e.target.value)}
