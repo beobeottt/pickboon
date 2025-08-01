@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
-
 import { Club } from "../types/Club";
 import Navbar from './NavBar';
 import Footer from "./footer";
