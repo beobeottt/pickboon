@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://viesports.org",
   "dependencies": {
+    "@radix-ui/react-primitive": "^2.1.3",
     "@radix-ui/react-select": "^2.2.5",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
