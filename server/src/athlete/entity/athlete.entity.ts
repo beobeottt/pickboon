@@ -1,19 +1,19 @@
-// src/athlete/athlete.entity.ts
+
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { Gender } from 'src/common/enums/gender.enum';
 
 @Entity()
 export class Athlete {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  uuid: string;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   location: string;
 
-  @Column()
+  @Column({ nullable: true })
   phoneNumber: string;
 
   @Column({ unique: true })
@@ -22,7 +22,7 @@ export class Athlete {
   @Column({ type: 'enum', enum: Gender, nullable: true })
   gender: Gender;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: 'float', nullable: true })
   point: number;
 
   @Column({ nullable: true })

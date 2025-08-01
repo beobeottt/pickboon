@@ -17,7 +17,7 @@ const AthleteListPage = () => {
             })
             .catch(err => {
                 setLoading(false);
-                alert("Lỗi khi lấy dữ liệu");
+                alert(`Lỗi khi lấy dữ liệu: ${err.message}`);
             });
     }, []);
 
@@ -54,7 +54,16 @@ const AthleteListPage = () => {
                                 {athletes.map((athlete, idx) => (
                                     <tr key={athlete._id || idx}
                                         className="bg-[#23243a] hover:bg-[#282a36] rounded cursor-pointer"
-                                        onClick={() => navigate(`/athlete/${athlete._id}`)}
+                                        onClick={() => {
+                                            if (athlete._id) {
+                                              console.log("Athlete clicked:", athlete);
+                                              navigate(`/athlete/${athlete._id}`);
+                                            } else {
+                                              console.warn("Athlete missing _id:", athlete);
+                                              alert("Không thể xem chi tiết vận động viên này vì thiếu ID.");
+                                            }
+                                          }}
+                                          
                                     >
                                         <td className="px-4 py-2 font-semibold flex items-center gap-2 text-white">
                                             {athlete.image && !imageErrors[athlete._id] ? (

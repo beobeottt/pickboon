@@ -9,6 +9,9 @@ import Navbar from "./pages/NavBar";
 import AthleteProfile from "./pages/AthleteProfile";
 import OfficialTournament from "./pages/AmateurTournament";
 import AthleteListPage from "./pages/AthleteListPage";
+import SocialListPage from "./pages/SocialListPage";
+import ClubDetailPage from "./pages/ClubDetailPage";
+import SocialDetailPage from "./pages/SocialDetailPage";
 
 function App(){
   return (
@@ -23,6 +26,9 @@ function App(){
         <Route path = "/athlete/:id" element={<AthleteProfile/>}/>
         <Route path = "/amateur-tournament" element={<OfficialTournament/>}/>
         <Route path = "/athlete-list" element={<AthleteListPage/>}/>
+        <Route path = "/social-list" element={<SocialListPage/>}/>
+        <Route path = "/club/:uuid" element={<ClubDetailPage/>}/>
+        <Route path = "/social/:id" element={<SocialDetailPage/>}/>
       </Routes>
     </Router>
   )

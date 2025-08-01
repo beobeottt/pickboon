@@ -1,47 +1,46 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Club } from './Schemas/club.schema';
-import { UpdateClubDto } from './dto/club.dto';
-
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Club } from './entity/club.entity';
+import { CreateClubDto, UpdateClubDto } from './dto/club.dto';
+import { Social } from 'src/social/entity/social.entity';
 
 @Injectable()
 export class ClubService {
   constructor(
-    @InjectModel(Club.name) private clubModel: Model<Club>,
+    @InjectRepository(Club)
+    private clubRepository: Repository<Club>,
   ) {}
 
-  async findAll(): Promise<Club[]> {
-    return this.clubModel.find().exec();
+  async create(createClubDto: CreateClubDto): Promise<Club> {
+    
+      const club = this.clubRepository.create(createClubDto);
+      return await this.clubRepository.save(club);
   }
 
-  async findOne(id: string): Promise<Club> {
-    const club = await this.clubModel.findById(id).exec();
-    if (!club) {
-      throw new NotFoundException(`Club with ID ${id} not found`);
-    }
-    return club;
+  async findAll(): Promise<Club[]> {
+    return this.clubRepository.find()
+  }
+
+  async findOne(uuid: string): Promise<Social> {
+      const club = await this.clubRepository.findOneBy({uuid});
+      if (!club) {
+        throw new HttpException('Không tìm thấy club', HttpStatus.NOT_FOUND);
+      }
+      return club
   }
 
   async update(id: string, updateClubDto: UpdateClubDto): Promise<Club> {
-    const updatedClub = await this.clubModel.findByIdAndUpdate(
-      id,
-      updateClubDto,
-      { new: true },
-    ).exec();
-
-    if (!updatedClub) {
-      throw new NotFoundException(`Club with ID ${id} not found`);
-    }
-
-    return updatedClub;
+    const club = await this.findOne(id);
+    const updated = Object.assign(club, updateClubDto);
+    return this.clubRepository.save(updated)
   }
 
-  async delete(id: string): Promise<Club> {
-    const deleted = await this.clubModel.findByIdAndDelete(id).exec();
-    if (!deleted) {
-      throw new NotFoundException(`Club with ID ${id} not found`);
-    }
-    return deleted;
+  async remove(id: string): Promise<void> {
+    
+      const result = await this.clubRepository.delete(id);
+      if (result.affected === 0) {
+        throw new HttpException('Không tìm thấy club', HttpStatus.NOT_FOUND);
   }
+}
 }

@@ -1,4 +1,5 @@
 export interface Social{
+    id: string;
     name: string;
     location: string;
     members: number;

@@ -7,7 +7,7 @@ const FormRegisterAthlete: React.FC = () => {
     phone: string;
     email: string;
     gender: string;
-    city: string;
+    location: string;
     point: string;
     image: File | null;
   }>({
@@ -15,7 +15,7 @@ const FormRegisterAthlete: React.FC = () => {
     phone: '',
     email: '',
     gender: '',
-    city: '',
+    location: '',
     point: '',
     image: null,
   });
@@ -47,7 +47,7 @@ const FormRegisterAthlete: React.FC = () => {
       submitFormData.append('phoneNumber', formData.phone);
       submitFormData.append('email', formData.email);
       submitFormData.append('gender', formData.gender);
-      submitFormData.append('location', formData.city);
+      submitFormData.append('location', formData.location);
       submitFormData.append('point', formData.point);
       
       // Thêm file ảnh nếu có
@@ -70,7 +70,7 @@ const FormRegisterAthlete: React.FC = () => {
         phone: '',
         email: '',
         gender: '',
-        city: '',
+        location: '',
         point: '',
         image: null,
       });

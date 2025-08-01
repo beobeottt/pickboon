@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
             <div className="absolute top-full left-0 mt-2 w-48 bg-[#2a2b35] border border-gray-600 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <ul className="py-2">
                 <li>
-                  <Link to = "#" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#3a3b45] hover:text-white">Social</Link>
+                  <Link to = "/social-list" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#3a3b45] hover:text-white">Social</Link>
                 </li>
                 <li>
                 <Link to = "/clubs" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#3a3b45] hover:text-white">List Of Club</Link>
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
             <summary className="cursor-pointer">PICKLEBALL CLUB</summary>
             <ul className="pl-4 space-y-2 text-sm">
             <li>
-                  <Link to = "#" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#3a3b45] hover:text-white">Social</Link>
+                  <Link to = "/social-list" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#3a3b45] hover:text-white">Social</Link>
                 </li>
                 <li>
                 <Link to = "/clubs" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#3a3b45] hover:text-white">List Of Club</Link>
