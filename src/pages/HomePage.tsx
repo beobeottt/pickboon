@@ -99,9 +99,9 @@ const HomePage = () => {
 
       {/* Giới thiệu */}
       <div className="max-w-5xl mx-auto text-center px-4">
-        <h2 className="text-3xl font-bold mb-4 text-white">PVNA Tour 2025</h2>
+        <h2 className="text-3xl font-bold mb-4 text-white">VieSports Tour 2025</h2>
         <p className="text-white mb-6">
-          VieSport TOUR 2025 – Giải đấu Pickleball đẳng cấp toàn quốc! Giải đấu hứa hẹn mang đến những trận đấu đỉnh cao, tinh thần thể thao sôi động và cơ hội kết nối cộng đồng Pickleball Việt Nam.
+          VieSports TOUR 2025 – Giải đấu Pickleball đẳng cấp toàn quốc! Giải đấu hứa hẹn mang đến những trận đấu đỉnh cao, tinh thần thể thao sôi động và cơ hội kết nối cộng đồng Pickleball Việt Nam.
         </p>
         {/* Tabs */}
         
